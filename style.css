@@ -1,0 +1,24 @@
+/*
+ style.css
+
+ Small custom styling on top of Bootstrap, just to make the
+ pages feel a little less "default template" and more polished.
+*/
+
+body {
+    background-color: #f4f6f9;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+table th {
+    font-weight: 500;
+}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Upload File - Secure File Sharing{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="card-title mb-3">Upload & Encrypt a File</h3>
+                <p class="text-muted">
+                    Your file will be encrypted with a unique AES key before
+                    it is stored on the server. No one, including the
+                    administrator, can read it without proper authorization.
+                </p>
+
+                <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Choose File</label>
+                        <input
+                            type="file"
+                            class="form-control"
+                            id="file"
+                            name="file"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Encrypt &amp; Upload
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

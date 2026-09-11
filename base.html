@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Secure File Sharing{% endblock %}</title>
+
+    <!-- Bootstrap for clean styling without writing lots of custom CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                🔒 Secure File Sharing
+            </a>
+            <div class="d-flex">
+                {% if current_user.is_authenticated %}
+                    <span class="navbar-text text-light me-3">
+                        Logged in as <strong>{{ current_user.username }}</strong>
+                    </span>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
+                    <a href="{{ url_for('upload') }}" class="btn btn-outline-light btn-sm me-2">Upload</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-sm me-2">Login</a>
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-sm">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
